@@ -7,7 +7,7 @@ spring 实践学习案例，与其它组件结合如 mybatis、jpa、dubbo、red
 基于Java 1.8
 
 #### Spring 版本
-- 5.0.7.RELEASE
+- 5.0.8.RELEASE
 
 #### 模块说明
 - spring-data

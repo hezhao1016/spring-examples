@@ -21,12 +21,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public List<UserInfo> findAll() {
+    public List<UserInfo> queryAll() {
         return userInfoMapper.findAll();
     }
 
     @Override
-    public UserInfo findByUserName(String userName) {
+    public UserInfo queryByUserName(String userName) {
         return userInfoMapper.findByUserName(userName);
     }
 

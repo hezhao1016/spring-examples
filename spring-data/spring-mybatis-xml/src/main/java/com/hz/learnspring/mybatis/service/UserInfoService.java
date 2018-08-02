@@ -11,8 +11,8 @@ import java.util.List;
  * @Time 2018-08-02 14:17
  */
 public interface UserInfoService {
-    List<UserInfo> findAll();
+    List<UserInfo> queryAll();
 
-    UserInfo findByUserName(String userName);
+    UserInfo queryByUserName(String userName);
 
 }

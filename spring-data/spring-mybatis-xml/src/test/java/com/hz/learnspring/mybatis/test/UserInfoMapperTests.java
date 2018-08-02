@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class UserInfoServiceTests extends TestBase {
+public class UserInfoMapperTests extends TestBase {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
@@ -17,25 +17,25 @@ public class UserInfoServiceTests extends TestBase {
     @Test
     public void testFindByUserName() {
         UserInfo user = userInfoMapper.findByUserName("admin");
-        System.out.println("==================================testFindByUserName==================================");
-        System.out.println(user);
-        System.out.println("==================================testFindByUserName==================================");
+        logger.info("==================================testFindByUserName==================================");
+        logger.info("user:{}", user);
+        logger.info("==================================testFindByUserName==================================");
     }
 
     @Test
     public void testFindAll() {
         List<UserInfo> users = userInfoMapper.findAll();
-        System.out.println("==================================testFindAll==================================");
+        logger.info("==================================testFindAll==================================");
         users.forEach(System.out::println);
-        System.out.println("==================================testFindAll==================================");
+        logger.info("==================================testFindAll==================================");
     }
 
     @Test
     public void testFindAllByPage() {
         List<UserInfo> pageInfo = getListByPage(2, 1);
-        System.out.println("==================================testFindAllByPage==================================");
-        pageInfo.forEach(e -> System.out.println(e));
-        System.out.println("==================================testFindAllByPage==================================");
+        logger.info("==================================testFindAllByPage==================================");
+        pageInfo.forEach(e -> logger.info(e.toString()));
+        logger.info("==================================testFindAllByPage==================================");
     }
 
     private List<UserInfo> getListByPage(int pageNum, int pageSize) {
