@@ -19,8 +19,11 @@
 
     <!-- 模块列表 -->
     <modules>
-        <!-- Spring Mybatis -->
-        <module>spring-mybatis</module>
+        <!-- Spring Mybatis XML -->
+        <module>spring-mybatis-xml</module>
+
+        <!-- Spring Mybatis 注解 -->
+        <module>spring-mybatis-annotation</module>
 
         <!-- Spring JDBC -->
         <module>spring-jdbc</module>
@@ -66,23 +69,6 @@
         </dependency>
 
 
-
-        <!-- mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.4</version>
-        </dependency>
 
         <!-- jpa -->
         <dependency>
