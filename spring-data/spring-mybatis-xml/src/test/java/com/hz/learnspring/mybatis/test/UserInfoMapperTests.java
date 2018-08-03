@@ -26,7 +26,7 @@ public class UserInfoMapperTests extends TestBase {
     public void testFindAll() {
         List<UserInfo> users = userInfoMapper.findAll();
         logger.info("==================================testFindAll==================================");
-        users.forEach(System.out::println);
+        users.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testFindAll==================================");
     }
 

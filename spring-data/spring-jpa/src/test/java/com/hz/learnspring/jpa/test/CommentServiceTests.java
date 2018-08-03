@@ -19,7 +19,7 @@ public class CommentServiceTests extends TestBase {
     public void testSearchComment(){
         val list = commentService.searchComment(null,"特金会", null, null, null, null);
         logger.info("==================================testSearchComment==================================");
-        list.forEach(System.out::println);
+        list.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchComment==================================");
     }
 

@@ -19,7 +19,7 @@ public class WeiboServiceTests extends TestBase {
     public void testGetUserWeibo(){
         val list = weiboService.getUserWeibo("admin");
         logger.info("==================================testGetUserWeibo==================================");
-        list.forEach(System.out::println);
+        list.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testGetUserWeibo==================================");
     }
 
@@ -27,7 +27,7 @@ public class WeiboServiceTests extends TestBase {
     public void testSearchWeibo(){
         val list = weiboService.searchWeibo("admin", "特金会", 1, 10);
         logger.info("==================================testSearchWeibo==================================");
-        list.forEach(System.out::println);
+        list.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchWeibo==================================");
     }
 
@@ -35,7 +35,7 @@ public class WeiboServiceTests extends TestBase {
     public void testSearchWeiboByCriteria(){
         val list = weiboService.searchWeiboByCriteria("admin", "特金会",null, null, 1, 10);
         logger.info("==================================testSearchWeiboByCriteria==================================");
-        list.forEach(System.out::println);
+        list.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchWeiboByCriteria==================================");
     }
 
@@ -43,7 +43,7 @@ public class WeiboServiceTests extends TestBase {
     public void testSearchWeiboByExampleMatcher(){
         val list = weiboService.searchWeiboByExampleMatcher("admin", "特金会");
         logger.info("==================================testSearchWeiboByExampleMatcher==================================");
-        list.forEach(System.out::println);
+        list.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchWeiboByExampleMatcher==================================");
     }
 

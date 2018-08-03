@@ -17,7 +17,7 @@ public class UserInfoServiceTests extends TestBase {
     public void testQueryUserList() {
         List<UserInfo> userList = userInfoService.queryUserList();
         logger.info("==================================testQueryUserList==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryUserList==================================");
     }
 
@@ -25,7 +25,7 @@ public class UserInfoServiceTests extends TestBase {
     public void testQueryUserByName() {
         List<UserInfo> userList = userInfoService.queryUserByName("b");
         logger.info("==================================testQueryUserByName==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryUserByName==================================");
     }
 
@@ -63,7 +63,7 @@ public class UserInfoServiceTests extends TestBase {
     public void testSearchUserName() {
         List<UserInfo> userList = userInfoService.searchUserName("admin");
         logger.info("==================================testSearchUserName==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchUserName==================================");
     }
 

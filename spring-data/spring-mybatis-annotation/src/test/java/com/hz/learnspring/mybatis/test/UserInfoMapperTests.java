@@ -18,7 +18,7 @@ public class UserInfoMapperTests extends TestBase {
     public void testQueryAll() {
         List<UserInfo> userList = userInfoMapper.queryAll();
         logger.info("==================================testQueryAll==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryAll==================================");
     }
 
@@ -41,7 +41,7 @@ public class UserInfoMapperTests extends TestBase {
         UserInfo userInfo = UserInfo.builder().name("b").build();
         List<UserInfo> userList = userInfoMapper.queryUserList(userInfo);
         logger.info("==================================testQueryUserList==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryUserList==================================");
     }
 
@@ -80,7 +80,7 @@ public class UserInfoMapperTests extends TestBase {
         UserInfo userInfo = UserInfo.builder().id(1L).name("ja").userName("admin").build();
         List<UserInfo> userList = userInfoMapper.searchUser(userInfo);
         logger.info("==================================testSearchUser==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSearchUser==================================");
     }
 
@@ -89,7 +89,7 @@ public class UserInfoMapperTests extends TestBase {
         UserInfo userInfo = UserInfo.builder().id(1L).name("ja").userName("admin").build();
         List<UserInfo> userList = userInfoMapper.findUser(userInfo);
         logger.info("==================================testFindUser==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testFindUser==================================");
     }
 

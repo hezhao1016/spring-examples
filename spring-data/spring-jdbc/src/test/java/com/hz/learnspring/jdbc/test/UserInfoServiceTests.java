@@ -17,7 +17,7 @@ public class UserInfoServiceTests extends TestBase {
     public void testQueryAll() {
         List<UserInfo> userList = userInfoService.queryAll();
         logger.info("==================================testQueryAll==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryAll==================================");
     }
 

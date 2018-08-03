@@ -18,7 +18,7 @@ public class UserInfoMapperTests extends TestBase {
     public void testSelectAll() {
         List<UserInfo> userList = userInfoMapper.selectAll();
         logger.info("==================================testSelectAll==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSelectAll==================================");
     }
 
@@ -27,7 +27,7 @@ public class UserInfoMapperTests extends TestBase {
         UserInfo userInfo = UserInfo.builder().name("bob").build();
         List<UserInfo> userList = userInfoMapper.select(userInfo);
         logger.info("==================================testSelectUserList==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testSelectUserList==================================");
     }
 
@@ -71,7 +71,7 @@ public class UserInfoMapperTests extends TestBase {
         UserInfo userInfo = UserInfo.builder().name("b").build();
         List<UserInfo> userList = userInfoMapper.queryUserList(userInfo);
         logger.info("==================================testQueryUserList==================================");
-        userList.forEach(System.out::println);
+        userList.forEach(e -> logger.info(e.toString()));
         logger.info("==================================testQueryUserList==================================");
     }
 
