@@ -26,15 +26,15 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
 
-	<!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 -->
+	<!--&lt;!&ndash; 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 &ndash;&gt;
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<!-- <prop key="org.apache.shiro.authz.UnauthorizedException">error/noperms</prop> -->
+				&lt;!&ndash; <prop key="org.apache.shiro.authz.UnauthorizedException">error/noperms</prop> &ndash;&gt;
 				<prop key="java.lang.Throwable">500</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 
 	<!-- 对静态资源文件的访问 方案一 （二选一） -->
 	<mvc:default-servlet-handler default-servlet-name="default"/>

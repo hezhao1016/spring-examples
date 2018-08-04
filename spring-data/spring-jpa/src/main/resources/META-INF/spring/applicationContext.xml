@@ -32,20 +32,20 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<property name="initialSize" value="${initialSize}" />
-		<property name="minIdle" value="${minIdle}" />
-		<property name="maxActive" value="${maxActive}" />
-		<property name="maxWait" value="${maxWait}" />
-		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
-		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
-		<property name="validationQuery" value="${validationQuery}" />
-		<property name="testWhileIdle" value="${testWhileIdle}" />
-		<property name="testOnBorrow" value="${testOnBorrow}" />
-		<property name="testOnReturn" value="${testOnReturn}" />
-		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
-		<property name="maxPoolPreparedStatementPerConnectionSize" value="${maxPoolPreparedStatementPerConnectionSize}" />
-		<property name="filters" value="${filters}" />
-		<property name="connectionProperties" value="${connectionProperties}" />
+		<property name="initialSize" value="${druid.initialSize}" />
+		<property name="minIdle" value="${druid.minIdle}" />
+		<property name="maxActive" value="${druid.maxActive}" />
+		<property name="maxWait" value="${druid.maxWait}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${druid.validationQuery}" />
+		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
+		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
+		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+		<property name="filters" value="${druid.filters}" />
+		<property name="connectionProperties" value="${druid.connectionProperties}" />
 	</bean>
 
 	<!-- 配置 JPA 的 EntityManagerFactory -->

@@ -1,12 +1,11 @@
 package com.hz.learnspring.redis.test;
 
-import com.hz.learnspring.redis.domain.UserInfo;
 import com.hz.learnspring.redis.test.base.TestBase;
+import com.hz.learnspring.redis.test.domain.UserInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.concurrent.TimeUnit;

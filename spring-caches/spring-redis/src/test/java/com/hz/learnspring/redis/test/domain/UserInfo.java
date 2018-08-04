@@ -1,4 +1,4 @@
-package com.hz.learnspring.redis.domain;
+package com.hz.learnspring.redis.test.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

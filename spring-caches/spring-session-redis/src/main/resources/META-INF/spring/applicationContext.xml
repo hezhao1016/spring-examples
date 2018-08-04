@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	   default-lazy-init="true">
+
+	<!-- 配置扫描包 -->
+	<context:component-scan base-package="com.hz.learnspring" />
+
+	<!-- 开启注解 -->
+	<context:annotation-config />
+
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath*:redis.properties"/>
+
+	<!-- 单机版Redis -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<constructor-arg ref="redisStandaloneConfiguration" />
+	</bean>
+	<bean id="redisStandaloneConfiguration" class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
+		<property name="hostName" value="${redis.standalone.host}"/>
+		<property name="port" value="${redis.standalone.port}"/>
+		<property name="database" value="${redis.standalone.database}"/>
+		<property name="password">
+			<bean class="org.springframework.data.redis.connection.RedisPassword" factory-method="of">
+				<constructor-arg type="java.lang.String" value="${redis.standalone.password}"/>
+			</bean>
+		</property>
+	</bean>
+
+    <!-- Spring Session共享 -->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <!--maxInactiveIntervalInSeconds设置Session失效时间,默认是1800秒过期，这里测试修改为60秒, 使用Redis Session之后，原Boot的server.servlet.session.timeout属性不再生效-->
+        <property name="maxInactiveIntervalInSeconds" value="60"/>
+    </bean>
+
+</beans>
