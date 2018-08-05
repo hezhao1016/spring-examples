@@ -19,16 +19,8 @@
 
     <!-- 模块列表 -->
     <modules>
-        
+        <!-- Spring 整合 Apache Shiro -->
+        <module>spring-shiro</module>
     </modules>
-
-    <dependencies>
-        <!-- shiro -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-    </dependencies>
 
 </project>

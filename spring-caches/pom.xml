@@ -21,15 +21,11 @@
     <modules>
         <!-- Spring Redis -->
         <module>spring-redis</module>
-        <!-- Spring Redis Config (自定义Redis配置信息) -->
-        <module>spring-redis-config</module>
-        <!-- Spring Redis :: 整合 Mybatis 并使用 Redis 作为缓存 -->
-        <module>spring-redis-mybatis</module>
 
-        <!-- Spring Cache 整合 Redis， 使用@Cacheable等注解 -->
-        <module>spring-cache-redis</module>
         <!-- Spring Cache 缓存 -->
         <module>spring-cache</module>
+        <!-- Spring Cache 整合 Redis， 使用@Cacheable等注解 -->
+        <module>spring-cache-redis</module>
         <!-- Spring Cache 集成 Ehcache -->
         <module>spring-cache-ehcache</module>
         <!-- Spring 集成 Ehcache3 -->
@@ -41,19 +37,5 @@
         <!-- Spring 使用Redis实现共享Session -->
         <module>spring-session-redis</module>
     </modules>
-
-    <dependencies>
-
-
-
-
-
-        <!-- spring-session -->
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-            <version>2.0.4.RELEASE</version>
-        </dependency>
-    </dependencies>
 
 </project>
