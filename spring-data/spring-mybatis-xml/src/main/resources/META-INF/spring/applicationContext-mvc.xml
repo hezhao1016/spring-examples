@@ -11,9 +11,6 @@
 			http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd"
 	   default-lazy-init="true">
 
-	<!-- 引入其他配置文件 -->
-	<import resource="classpath*:META-INF/spring/applicationContext.xml" />
-
 	<!-- 开启MVC注解 -->
 	<mvc:annotation-driven />
 
