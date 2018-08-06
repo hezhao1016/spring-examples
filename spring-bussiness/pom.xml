@@ -25,6 +25,23 @@
         <!-- Spring Config 配置文件 -->
         <module>spring-config</module>
 
+        <!-- Spring 全局异常处理 -->
+        <module>spring-exception</module>
+
+        <!-- Spring 配置 Filter、Servlet、Listener(监听)、interceptor(拦截器) -->
+        <module>spring-filter</module>
+
+        <!-- Spring 文件下载 -->
+        <module>spring-upload</module>
+
+        <!-- Spring Task 定时任务 -->
+        <module>spring-task</module>
+
+        <!-- Spring 使用 Quartz 实现定时任务 -->
+        <module>spring-task-quartz</module>
+
+        <!-- Spring MVC 国际化 -->
+        <module>spring-mvc-i18n</module>
 
     </modules>
 

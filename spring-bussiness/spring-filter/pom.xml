@@ -9,7 +9,7 @@
     <packaging>war</packaging>
 
     <name>spring-filter</name>
-    <description>Spring 配置 Filter、Servlet、Listener(监听)、interceptor(拦截器)、PostConstruct</description>
+    <description>Spring 配置 Filter、Servlet、Listener(监听)、interceptor(拦截器)</description>
 
     <parent>
         <groupId>com.hz.learnspring</groupId>
