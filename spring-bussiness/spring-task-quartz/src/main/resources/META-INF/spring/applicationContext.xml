@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	   default-lazy-init="true">
+
+	<!-- 配置扫描包 -->
+	<context:component-scan base-package="com.hz.learnspring" />
+	<!-- 开启注解 -->
+	<context:annotation-config />
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath*:config.properties" />
+
+
+	<!-- ========== 第一种方式 ========== -->
+	<!-- 将JavaBean的方法定义为任务  -->
+	<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" id="jobDetailLoggerManager">
+		<!-- 配置要调用的Bean实例 -->
+		<property name="targetObject" ref="loggerJob"></property>
+		<!-- 配置要调用的方法 -->
+		<property name="targetMethod" value="log"></property>
+	</bean>
+	<!-- Spring还提供了CronTriggerBean来支持精确的时间规则定义 -->
+	<bean class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" id="cronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetailLoggerManager"></property>
+		<property name="cronExpression" value="1/2 * * * * ?"></property>
+	</bean>
+	<!-- 配置SchedulerFactoryBean注册任务和触发器 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerFactoryBean"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- ========== 第二种方式 ========== -->
+	<!-- 通过配置JobDetailBean创建一个任务实例，并注入任务数据 -->
+	<bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean" id="jobDetailFactoryBean">
+		<property name="jobClass" value="com.hz.learnspring.quartz.job.LoggerManager"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="message" value="${message2}"></entry>
+			</map>
+		</property>
+	</bean>
+	<!-- 通过配置SimpleTriggerBean创建触发器规则 -->
+	<bean class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean" id="simpleTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetailFactoryBean"></property>
+		<property name="startDelay" value="1000"></property>
+		<property name="repeatCount" value="5"></property>
+		<property name="repeatInterval" value="1000"></property>
+	</bean>
+	<!-- 配置SchedulerFactoryBean注册任务和触发器 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<array>
+				<ref bean="simpleTriggerFactoryBean"/>
+			</array>
+		</property>
+	</bean>
+
+</beans>

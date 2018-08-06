@@ -19,27 +19,13 @@
 
     <!-- 模块列表 -->
     <modules>
-        
-    </modules>
+        <!-- Spring AOP 面向切面编程 -->
+        <module>spring-aop</module>
 
-    <dependencies>
-        <!-- quartz -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <!-- Spring 集成 Quartz需要引用 spring-context-support -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-    </dependencies>
+        <!-- Spring Config 配置文件 -->
+        <module>spring-config</module>
+
+
+    </modules>
 
 </project>

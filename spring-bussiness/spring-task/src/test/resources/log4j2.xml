@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30" status="WARN">
+	<Properties>
+		<Property name="LOG_PATTERN" value="[%level{length=5}] %date [%X{ThreadName}] [%logger:%line] >>> %msg%n" />
+		<Property name="ROOT_LOG_LEVEL" value="INFO" />
+		<Property name="CONSOLE_LEVEL" value="INFO" />
+		<Property name="FRAMEWORK_LEVEL" value="INFO" />
+	</Properties>
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<logger name="org.springframework" level="${FRAMEWORK_LEVEL}" />
+		<AsyncRoot level="${ROOT_LOG_LEVEL}" includeLocation="true">
+			<AppenderRef ref="CONSOLE" />
+		</AsyncRoot>
+	</Loggers>
+</Configuration>
