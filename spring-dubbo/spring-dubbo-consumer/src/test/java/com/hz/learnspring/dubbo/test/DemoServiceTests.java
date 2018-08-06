@@ -19,7 +19,7 @@ public class DemoServiceTests extends TestBase {
     private DemoService demoService;
 
     @Test
-    public void contextLoads() {
+    public void testSayHello() {
         // 隐式传参
         RpcContext.getContext().setAttachment("ThreadName", UUID.randomUUID().toString());
 

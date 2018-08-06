@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hz.learnspring</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>spring-aop</name>
+    <description>Spring AOP 面向切面编程</description>
+
+    <parent>
+        <groupId>com.hz.learnspring</groupId>
+        <artifactId>spring-bussiness</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <!-- 模块列表 -->
+    <modules>
+        <!-- Spring AOP 起步 -->
+        <module>spring-aop-1-start</module>
+        <!-- Spring AOP 注解方式使用 -->
+        <module>spring-aop-2-annotation</module>
+        <!-- Spring AOP Schema方式使用 -->
+        <module>spring-aop-3-schema</module>
+        <!-- Spring AOP 使用AOP 之 自定义注解实现控制器访问次数限制 -->
+        <module>spring-aop-accesslimit</module>
+    </modules>
+
+</project>

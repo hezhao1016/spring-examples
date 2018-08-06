@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd"
+	   default-lazy-init="true">
+
+	<!-- 配置扫描包 -->
+	<context:component-scan base-package="com.hz.learnspring" />
+
+	<!-- 开启注解 -->
+	<context:annotation-config />
+
+	<!-- 使用Schema模式配置切面 -->
+	<aop:config>
+		<aop:pointcut expression="execution( * com.hz.learnspring.aops.service..watch(..))" id="pc1"/>
+		<aop:pointcut expression="execution( * com.hz.learnspring.aops.service..sale(..))" id="pc2"/>
+		<aop:aspect ref="zhongJieKanFang">
+			<!-- 前置增强 -->
+			<aop:before method="kanFang" pointcut-ref="pc1"/>
+			<!-- 后置增强 -->
+			<aop:after-returning method="guoHu" pointcut-ref="pc2" returning="result"/>
+			<!-- 环绕增强 -->
+			<aop:around method="maiFang" pointcut-ref="pc2"/>
+			<!-- 最终增强 -->
+			<aop:after method="afterLogger" pointcut-ref="pc2"/>
+		</aop:aspect>
+		<aop:aspect ref="errorLogger">
+			<!-- 异常增强 -->
+			<aop:after-throwing method="maiFangError" pointcut-ref="pc2" throwing="ex"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

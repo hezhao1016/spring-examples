@@ -16,7 +16,7 @@ public class DemoServiceTests extends TestBase {
     private DemoService demoService;
 
     @Test
-    public void contextLoads() {
+    public void testSayHello() {
         Person person = Person.builder().name("艾编程").age(23).build();
         String sayHello = demoService.sayHello(person);
         System.out.println(sayHello);

@@ -23,7 +23,7 @@ public class MemcachedTests extends TestBase {
     }
 
     @Test
-    public void contextLoads() throws InterruptedException {
+    public void testMemcachedClient() throws InterruptedException {
         // 放入缓存
         boolean flag = memCachedClient.set("a", 1);
 
