@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd"
+	   default-lazy-init="true">
+
+	<!-- 定义consumer的参数 -->
+	<bean id="consumerProperties" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 指定了要连接到的broker,多个逗号分隔 -->
+				<entry key="bootstrap.servers" value="${kafka.servers}" />
+				<!-- 分组ID -->
+				<entry key="group.id" value="${kafka.group.id}" />
+				<!-- 自动提交 -->
+				<entry key="enable.auto.commit" value="${kafka.enable.auto.commit}"/>
+				<entry key="auto.commit.interval.ms" value="${kafka.auto.commit.interval.ms}"/>
+				<entry key="auto.offset.reset" value="${kafka.auto.offset.reset}"/>
+				<entry key="session.timeout.ms" value="${kafka.session.timeout.ms}"/>
+				<!-- 用来指定key的反序列化器 -->
+				<entry key="key.deserializer" value="${kafka.key.deserializer}"/>
+				<!-- 用来指定value的反序列化器 -->
+				<entry key="value.deserializer" value="${kafka.key.deserializer}"/>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- 创建consumerFactory bean -->
+	<bean id="consumerFactory" class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
+		<constructor-arg>
+			<ref bean="consumerProperties" />
+		</constructor-arg>
+	</bean>
+
+	<!-- 实际执行消息消费的类 -->
+	<bean id="stringMessageListener" class="com.hz.learnspring.kafka.service.StringMessageListener"/>
+	<bean id="jsonMessageListener" class="com.hz.learnspring.kafka.service.JSONMessageListener"/>
+
+	<!-- 消费者容器配置信息 -->
+	<bean id="containerProperties_string" class="org.springframework.kafka.listener.config.ContainerProperties">
+		<constructor-arg value="test.string"/>
+		<property name="messageListener" ref="stringMessageListener"/>
+	</bean>
+	<bean id="containerProperties_message" class="org.springframework.kafka.listener.config.ContainerProperties">
+		<constructor-arg value="test.message"/>
+		<property name="messageListener" ref="jsonMessageListener"/>
+	</bean>
+
+	<!-- 创建messageListenerContainer bean，使用的时候，只需要注入这个bean -->
+	<bean id="messageListenerContainer_string" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
+		  init-method="doStart">
+		<constructor-arg ref="consumerFactory"/>
+		<constructor-arg ref="containerProperties_string"/>
+	</bean>
+
+	<bean id="messageListenerContainer_message" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
+		  init-method="doStart">
+		<constructor-arg ref="consumerFactory"/>
+		<constructor-arg ref="containerProperties_message"/>
+	</bean>
+
+</beans>

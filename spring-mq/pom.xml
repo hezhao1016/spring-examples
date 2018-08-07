@@ -23,58 +23,9 @@
     </modules>
 
     <dependencies>
-        <!-- rabbitmq -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
-            <version>5.0.7.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-rabbit</artifactId>
-            <version>2.0.4.RELEASE</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>http-client</artifactId>
-                    <groupId>com.rabbitmq</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
-        <!-- activemq -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jms</artifactId>
-            <version>5.0.7.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-broker</artifactId>
-            <version>5.15.4</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>geronimo-jms_1.1_spec</artifactId>
-                    <groupId>org.apache.geronimo.specs</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>javax.jms-api</artifactId>
-            <version>2.0.1</version>
-            <scope>compile</scope>
-        </dependency>
 
-        <!-- spring-kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <version>2.1.7.RELEASE</version>
-        </dependency>
+
 
         <!-- rocketmq -->
         <dependency>
@@ -82,6 +33,8 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.2.0</version>
         </dependency>
+
+
     </dependencies>
 
 </project>

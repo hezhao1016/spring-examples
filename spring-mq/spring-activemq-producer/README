@@ -1,0 +1,4 @@
+ps:整合完并没有运行成功，暂时不知道什么原因。
+报错：xmlns:amq="http://activemq.apache.org/schema/core 这个文档找不到
+
+2018/08/07

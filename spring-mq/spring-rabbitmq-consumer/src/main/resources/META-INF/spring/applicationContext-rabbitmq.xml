@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+			http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd"
+	   default-lazy-init="true">
+
+	<!-- RabbitMQ连接线程池 -->
+	<task:executor id="amqpConnectionTaskExecutor" pool-size="#{env['rabbitmq.pool.size']?:1}" />
+
+	<!-- RabbitMQ连接池 -->
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+							   channel-cache-size="#{env['rabbitmq.cache.size']?:25}" executor="amqpConnectionTaskExecutor"
+							   addresses="#{env['rabbitmq.address']}" virtual-host="#{env['rabbitmq.virtualhost']?:'/'}"
+							   username="#{env['rabbitmq.username']?:'guest'}" password="#{env['rabbitmq.password']?:'guest'}" />
+
+	<!-- rabbitmqTemplate -->
+	<rabbit:template id="rabbitmqTemplate" connection-factory="rabbitConnectionFactory" />
+
+	<!-- 供自动创建队列 -->
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+	<!-- 开启RabbitMQ注解 -->
+	<rabbit:annotation-driven />
+
+	<!-- 消息监听 -->
+	<rabbit:listener-container connection-factory="rabbitConnectionFactory" max-concurrency="#{env['rabbitmq.cache.size']?:10}">
+		<rabbit:listener ref="topicMessageListener" queues="topic.messages" method="onMessage" />
+	</rabbit:listener-container>
+
+</beans>

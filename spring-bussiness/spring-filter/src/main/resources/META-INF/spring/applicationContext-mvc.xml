@@ -14,6 +14,7 @@
 	<!-- 开启MVC注解 -->
 	<mvc:annotation-driven />
 
+	<!-- 开启AOP注解 -->
 	<aop:aspectj-autoproxy />
 
 	<!-- 配置视图解析器 -->

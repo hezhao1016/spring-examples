@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+			http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd"
+	   default-lazy-init="true">
+
+	<!-- RabbitMQ连接线程池 -->
+	<task:executor id="amqpConnectionTaskExecutor" pool-size="#{env['rabbitmq.pool.size']?:1}" />
+
+	<!-- RabbitMQ连接池 -->
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+							   channel-cache-size="#{env['rabbitmq.cache.size']?:25}" executor="amqpConnectionTaskExecutor"
+							   addresses="#{env['rabbitmq.address']}" virtual-host="#{env['rabbitmq.virtualhost']?:'/'}"
+							   username="#{env['rabbitmq.username']?:'guest'}" password="#{env['rabbitmq.password']?:'guest'}" />
+
+	<!-- rabbitmqTemplate -->
+	<rabbit:template id="rabbitmqTemplate" connection-factory="rabbitConnectionFactory" />
+
+	<!-- 供自动创建队列 -->
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+	<!-- 开启RabbitMQ注解 -->
+	<rabbit:annotation-driven />
+
+	<!-- ===================================工作队列=================================== -->
+	<!-- 工作队列 -->
+	<rabbit:queue id="simple.message" />
+
+	<!-- ====================================主题模式================================== -->
+	<rabbit:queue id="topic.message" /><!--主题队列1-->
+	<rabbit:queue id="topic.messages" /><!--主题队列2-->
+	<!-- Topic 主题模式交换机
+	durable:是否持久化
+	auto-delete:当所有消费客户端连接断开后，是否自动删除队列 -->
+	<rabbit:topic-exchange name="topicExchange">
+		<!-- 将队列与交换机绑定 -->
+		<rabbit:bindings>
+			<!-- topic：将路由键和某模式进行匹配。此时队列需要绑定要一个模式上。符号 “#” 匹配一个或多个词，符号“”匹配不多不少一个词。
+			 因此发送“topic.message”会匹配到topic.#和topic.message， 所以两个Receiver都可以收到消息，发送“topic.messages”只有topic.#可以匹配，所以只有Receiver2监听到消息 -->
+			<rabbit:binding queue="topic.message" pattern="topic.message" />
+			<rabbit:binding queue="topic.messages" pattern="topic.#" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<!-- ====================================路由模式================================== -->
+	<rabbit:queue id="direct.message" /><!--路由队列-->
+	<!-- Direct 路由模式交换机 -->
+	<rabbit:direct-exchange name="directExchange">
+		<!-- 将队列与交换机绑定 -->
+		<rabbit:bindings>
+			<!-- direct：处理路由键。需要将一个队列绑定到交换机上，要求该消息与一个特定的路由键完全匹配。
+			如果一个队列绑定到该交换机上要求路由键 “dog”，则只有被标记为 “dog” 的消息才被转发，不会转发 dog.puppy，也不会转发 dog.guard，只会转发dog。 -->
+			<rabbit:binding queue="direct.message" key="demo" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+
+	<!-- ===================================发布/订阅模式=================================== -->
+	<rabbit:queue id="fanout.message1" /><!--发布/订阅队列1-->
+	<rabbit:queue id="fanout.message2" /><!--发布/订阅队列2-->
+	<!-- Fanout 发布/订阅模式交换机 -->
+	<rabbit:fanout-exchange name="fanoutExchange">
+		<!-- 将队列与交换机绑定 -->
+		<rabbit:bindings>
+			<!-- Fanout 就是我们熟悉的广播模式或者订阅模式，给Fanout交换机发送消息，绑定了这个交换机的所有队列都收到这个消息。
+			fanout：不处理路由键。只需要简单的将队列绑定到交换机上。一个发送到交换机的消息都会被转发到与该交换机绑定的所有队列上。
+    		很像子网广播，每台子网内的主机都获得了一份复制的消息。fanout 类型交换机转发消息是最快的。 -->
+			<rabbit:binding queue="fanout.message1" />
+			<rabbit:binding queue="fanout.message2" />
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+</beans>

@@ -8,6 +8,7 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
        default-lazy-init="true">
 
+	<!-- 引入其他配置文件 -->
 	<import resource="classpath*:META-INF/spring/*.xml" />
 
 </beans>

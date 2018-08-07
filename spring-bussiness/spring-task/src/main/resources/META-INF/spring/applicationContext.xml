@@ -18,7 +18,14 @@
 	<context:annotation-config />
 
 	<!-- 开启定时任务注解，发现注解了@Scheduled的任务并后台执行 -->
-	<task:annotation-driven />
+	<task:annotation-driven scheduler="scheduler" executor="executor" />
+
+	<!-- Spring定时任务默认单线程，推荐配置线程池 -->
+	<!-- 调度线程池,调度线程在被调度任务完成前不会空闲  -->
+	<task:scheduler id="scheduler" pool-size="10" />
+
+	<!-- 执行线程池 -->
+	<task:executor id="executor" pool-size="4"/>
 
 	<!-- XML方式配置注解 -->
 	<task:scheduled-tasks>
@@ -27,4 +34,5 @@
 		<!-- 固定每3秒执行一次 -->
 		<task:scheduled ref="xmlTask" method="runRate" fixed-rate="3000"/>
 	</task:scheduled-tasks>
+
 </beans>
