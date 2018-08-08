@@ -20,7 +20,7 @@ spring 实践学习案例，与其它组件结合如 mybatis、jpa、dubbo、red
     - Spring 文档生成工具，包括 Swagger
     
 - spring-bussiness
-    - Spring 业务应用，包括 AOP、过滤器、定时任务、上传文件 等。
+    - Spring 业务应用，包括 AOP、过滤器、定时任务、上传文件、国际化 等。
     
 - spring-dubbo
     - Spring 集成 Dubbo
