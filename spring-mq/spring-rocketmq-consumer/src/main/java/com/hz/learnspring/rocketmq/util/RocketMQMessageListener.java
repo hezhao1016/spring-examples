@@ -62,7 +62,7 @@ public abstract class RocketMQMessageListener {
             //调用start()方法启动consumer
             consumer.start();
 
-            logger.info("Consumer Started.");
+            System.out.println("Consumer Started.");
         } catch (MQClientException e) {
             e.printStackTrace();
         }

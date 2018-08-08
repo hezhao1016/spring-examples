@@ -49,7 +49,7 @@ public class JSONMessageListener extends RocketMQMessageListener {
                     // 转换为对象
                     Message obj = JSON.parseObject(message, Message.class);
 
-                    logger.info(Thread.currentThread().getName() + " Receive New Messages JSON : " + obj);
+                    System.out.println(Thread.currentThread().getName() + " Receive New Messages JSON : " + obj);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

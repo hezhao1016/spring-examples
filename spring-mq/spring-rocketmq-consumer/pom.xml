@@ -24,11 +24,6 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.2.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-common</artifactId>
-            <version>4.2.0</version>
-        </dependency>
     </dependencies>
 
     <build>

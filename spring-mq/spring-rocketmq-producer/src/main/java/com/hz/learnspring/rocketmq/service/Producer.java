@@ -59,7 +59,7 @@ public class Producer {
             SendResult sendResult = producer.send(msg);
 
             // 打印返回结果，可以看到消息发送的状态以及一些相关信息
-            logger.info("已发送 - " + message + ", 结果 - " + sendResult);
+            System.out.println("已发送 - " + message + ", 结果 - " + sendResult);
 
             // 发送完消息之后，调用shutdown()方法关闭producer
             // producer.shutdown();

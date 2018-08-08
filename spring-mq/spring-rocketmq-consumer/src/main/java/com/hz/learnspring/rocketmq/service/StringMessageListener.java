@@ -43,7 +43,7 @@ public class StringMessageListener extends RocketMQMessageListener {
             for (MessageExt msg : msgs) {
                 try {
                     String message = new String(msg.getBody(), RemotingHelper.DEFAULT_CHARSET);
-                    logger.info(Thread.currentThread().getName() + " Receive New Messages: " + message);
+                    System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + message);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

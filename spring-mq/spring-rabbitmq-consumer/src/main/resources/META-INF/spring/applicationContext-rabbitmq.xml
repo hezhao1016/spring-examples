@@ -10,30 +10,23 @@
 			http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd"
 	   default-lazy-init="true">
 
-	<!-- RabbitMQ连接线程池 -->
-	<task:executor id="amqpConnectionTaskExecutor" pool-size="#{env['rabbitmq.pool.size']?:1}" />
-
 	<!-- RabbitMQ连接池 -->
-	<rabbit:connection-factory id="rabbitConnectionFactory"
-							   channel-cache-size="#{env['rabbitmq.cache.size']?:25}" executor="amqpConnectionTaskExecutor"
-							   addresses="#{env['rabbitmq.address']}" virtual-host="#{env['rabbitmq.virtualhost']?:'/'}"
-							   username="#{env['rabbitmq.username']?:'guest'}" password="#{env['rabbitmq.password']?:'guest'}" />
-
-	<!-- rabbitmqTemplate -->
-	<rabbit:template id="rabbitmqTemplate" connection-factory="rabbitConnectionFactory" />
-
-	<!-- 供自动创建队列 -->
-	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+	<rabbit:connection-factory id="rabbitConnectionFactory" channel-cache-size="${rabbitmq.cache.size}"
+							   addresses="${rabbitmq.address}" virtual-host="${rabbitmq.virtualhost}"
+							   username="${rabbitmq.username}" password="${rabbitmq.password}" />
 
 	<!-- 开启RabbitMQ注解 -->
 	<rabbit:annotation-driven />
 
-	<!-- 实际执行消息消费的类 -->
-	<bean id="topicMessageListener" class="com.hz.learnspring.rabbitmq.service.TopicMessageListener"/>
+	<!-- json转换器，消息可以自动根据转换器转换格式，不配置时默认为java序列化，可以自行配置 -->
+	<bean id="messageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />
 
-	<!-- 消息监听 -->
-	<rabbit:listener-container connection-factory="rabbitConnectionFactory" max-concurrency="#{env['rabbitmq.cache.size']?:10}">
-		<rabbit:listener ref="topicMessageListener" queues="topic.messages" method="onMessage" />
-	</rabbit:listener-container>
+	<!-- 监听配置 -->
+	<bean id="rabbitListenerContainerFactory" class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
+		<property name="connectionFactory" ref="rabbitConnectionFactory" />
+		<property name="messageConverter" ref="messageConverter" />
+		<property name="concurrentConsumers" value="3" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
 
 </beans>

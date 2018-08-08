@@ -4,6 +4,7 @@ import com.hz.learnspring.rabbitmq.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  * Created by hezhao on 2018-07-26 10:52
  */
 @Service
+@Lazy(false)
 public class Receiver {
 
     private Logger logger = LoggerFactory.getLogger(Receiver.class);
@@ -42,6 +44,10 @@ public class Receiver {
     @RabbitListener(queues = "topic.message")
     public void receiveTopicMessage1(Person person) {
         logger.info(Thread.currentThread().getName() + " - Received topic.message <" + person + ">");
+    }
+    @RabbitListener(queues = "topic.messages")
+    public void receiveTopicMessage2(Person person) {
+        logger.info(Thread.currentThread().getName() + " - Received topic.messages <" + person + ">");
     }
 
 

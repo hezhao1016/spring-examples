@@ -36,31 +36,26 @@
 		</constructor-arg>
 	</bean>
 
-	<!-- 实际执行消息消费的类 -->
-	<bean id="stringMessageListener" class="com.hz.learnspring.kafka.service.StringMessageListener"/>
-	<bean id="jsonMessageListener" class="com.hz.learnspring.kafka.service.JSONMessageListener"/>
+	<!-- 定义消费实现类 -->
+	<bean id="kafkaMessageListener" class="com.hz.learnspring.kafka.service.KafkaMessageListener"/>
 
 	<!-- 消费者容器配置信息 -->
-	<bean id="containerProperties_string" class="org.springframework.kafka.listener.config.ContainerProperties">
-		<constructor-arg value="test.string"/>
-		<property name="messageListener" ref="stringMessageListener"/>
-	</bean>
-	<bean id="containerProperties_message" class="org.springframework.kafka.listener.config.ContainerProperties">
-		<constructor-arg value="test.message"/>
-		<property name="messageListener" ref="jsonMessageListener"/>
-	</bean>
-
-	<!-- 创建messageListenerContainer bean，使用的时候，只需要注入这个bean -->
-	<bean id="messageListenerContainer_string" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
-		  init-method="doStart">
-		<constructor-arg ref="consumerFactory"/>
-		<constructor-arg ref="containerProperties_string"/>
+	<bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">
+		<!-- 要监听的topic列表 -->
+		<constructor-arg name="topics">
+			<list>
+				<value>test.string</value>
+				<value>test.message</value>
+			</list>
+		</constructor-arg>
+		<property name="messageListener" ref="kafkaMessageListener"/>
 	</bean>
 
-	<bean id="messageListenerContainer_message" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
+	<!-- 消费者并发消息监听容器，执行doStart()方法 -->
+	<bean id="messageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
 		  init-method="doStart">
 		<constructor-arg ref="consumerFactory"/>
-		<constructor-arg ref="containerProperties_message"/>
+		<constructor-arg ref="containerProperties"/>
 	</bean>
 
 </beans>

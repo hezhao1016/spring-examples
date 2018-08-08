@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Date;
  * @Time 2018-07-28 12:00
  */
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class Message {
+public class Message implements Serializable {
+    private static final long serialVersionUID = 2275564594226992724L;
 
     // id
     private Long id;
