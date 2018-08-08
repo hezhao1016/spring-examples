@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hz.learnspring</groupId>
-    <artifactId>spring-kafka-comsumer</artifactId>
+    <artifactId>spring-kafka-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-kafka-comsumer</name>
+    <name>spring-kafka-consumer</name>
     <description>Spring Kafka 消费者</description>
 
     <parent>
@@ -27,7 +27,7 @@
     </dependencies>
 
     <build>
-        <finalName>spring-kafka-comsumer</finalName>
+        <finalName>spring-kafka-consumer</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

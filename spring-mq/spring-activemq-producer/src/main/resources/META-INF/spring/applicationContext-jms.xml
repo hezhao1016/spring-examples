@@ -32,6 +32,10 @@
 		<!--<property name="pubSubDomain" value="true" />-->
 	</bean>
 
+	<bean id="jmsMessagingTemplate" class="org.springframework.jms.core.JmsMessagingTemplate">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
 	<!-- Queue队列 -->
 	<bean id="sampleQueue" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg index="0" value="sample.queue"/>

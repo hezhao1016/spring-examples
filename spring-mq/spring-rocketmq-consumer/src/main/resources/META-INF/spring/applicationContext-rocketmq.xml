@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd"
+	   default-lazy-init="false">
+
+	<!-- 消费者 -->
+	<bean id="stringMessageListener" class="com.hz.learnspring.rocketmq.service.StringMessageListener">
+		<constructor-arg index="0" value="${rocketmq.servers}"/>
+		<constructor-arg index="1" value="${rocketmq.consumer.group1}"/>
+		<constructor-arg index="2" value="test_string"/>
+		<constructor-arg index="3" value="tagA"/>
+	</bean>
+
+	<bean id="jsonMessageListener" class="com.hz.learnspring.rocketmq.service.JSONMessageListener">
+		<constructor-arg index="0" value="${rocketmq.servers}"/>
+		<constructor-arg index="1" value="${rocketmq.consumer.group2}"/>
+		<constructor-arg index="2" value="test_message"/>
+		<constructor-arg index="3" value="*"/>
+	</bean>
+
+</beans>

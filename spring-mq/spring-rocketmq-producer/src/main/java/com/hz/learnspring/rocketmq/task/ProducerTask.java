@@ -1,8 +1,8 @@
-package com.hz.learnspring.kafka.task;
+package com.hz.learnspring.rocketmq.task;
 
 import com.alibaba.fastjson.JSON;
-import com.hz.learnspring.kafka.domain.Message;
-import com.hz.learnspring.kafka.service.Sender;
+import com.hz.learnspring.rocketmq.domain.Message;
+import com.hz.learnspring.rocketmq.service.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +17,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by hezhao on 2018-07-25 09:17
  */
 @Component
-public class SenderTask {
+public class ProducerTask {
 
     @Autowired
-    private Sender sender;
+    private Producer producer;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
@@ -31,7 +31,7 @@ public class SenderTask {
     public void sendTextMessage() {
         int num = count.getAndIncrement();
         String message = "["+ num +"] " + Thread.currentThread().getName() + " - 我是生产者，我现在正在生产文本消息！现在的时间是：" + sdf.format(new Date());
-        sender.sendMessage("test.string", message);
+        producer.sendMessage("test_string", "tagA", message);
     }
 
     // 发生JSON消息
@@ -41,7 +41,7 @@ public class SenderTask {
         message.setId(System.currentTimeMillis());
         message.setMsg("[" + num + "]" + UUID.randomUUID().toString());
         message.setSendTime(new Date());
-        sender.sendMessage("test.message", "obj", JSON.toJSONString(message));
+        producer.sendMessage("test_message", "obj", JSON.toJSONString(message));
     }
 
 }

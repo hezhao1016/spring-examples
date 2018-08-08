@@ -5,7 +5,6 @@ import com.hz.learnspring.rabbitmq.domain.Person;
 import com.hz.learnspring.rabbitmq.util.AmqpListenerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -14,7 +13,6 @@ import java.util.Map;
  *
  * Created by hezhao on 2018-08-07 16:08
  */
-@Service
 public class TopicMessageListener extends AmqpListenerTemplate<Person> {
     private static final Logger logger = LoggerFactory.getLogger(TopicMessageListener.class);
 

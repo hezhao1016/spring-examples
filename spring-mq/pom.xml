@@ -19,22 +19,28 @@
 
     <!-- 模块列表 -->
     <modules>
-        
+        <!-- Spring ActiveMQ 消费者 -->
+        <module>spring-activemq-consumer</module>
+        <!-- Spring ActiveMQ 生产者 -->
+        <module>spring-activemq-producer</module>
+
+        <!-- Spring Kafka 消费者 -->
+        <module>spring-kafka-consumer</module>
+        <!-- Spring Kafka 生产者 -->
+        <module>spring-kafka-producer</module>
+
+        <!-- Spring RabbitMQ 消费者 -->
+        <module>spring-rabbitmq-consumer</module>
+        <!-- Spring RabbitMQ 生产者 -->
+        <module>spring-rabbitmq-producer</module>
+
+        <!-- Spring RocketMQ 消费者 -->
+        <module>spring-rocketmq-consumer</module>
+        <!-- Spring RocketMQ 生产者 -->
+        <module>spring-rocketmq-producer</module>
+
+        <!-- Spring 使用 Redis 作为 消息队列 示例 -->
+        <module>spring-redismq</module>
     </modules>
-
-    <dependencies>
-
-
-
-
-        <!-- rocketmq -->
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-
-
-    </dependencies>
 
 </project>

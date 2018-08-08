@@ -28,6 +28,9 @@
 	<!-- 开启RabbitMQ注解 -->
 	<rabbit:annotation-driven />
 
+	<!-- 实际执行消息消费的类 -->
+	<bean id="topicMessageListener" class="com.hz.learnspring.rabbitmq.service.TopicMessageListener"/>
+
 	<!-- 消息监听 -->
 	<rabbit:listener-container connection-factory="rabbitConnectionFactory" max-concurrency="#{env['rabbitmq.cache.size']?:10}">
 		<rabbit:listener ref="topicMessageListener" queues="topic.messages" method="onMessage" />
