@@ -17,18 +17,19 @@
 	<!-- 开启注解 -->
 	<context:annotation-config />
 
-	<!-- 开启定时任务注解，发现注解了@Scheduled的任务并后台执行 -->
-	<task:annotation-driven scheduler="scheduler" />
+	<!-- 开启异步任务注解，发现注解了@Async的异步任务 -->
+	<task:annotation-driven executor="executor" />
 
-	<!-- Spring定时任务默认单线程，推荐配置线程池 -->
-	<task:scheduler id="scheduler" pool-size="10" />
-
-	<!-- XML方式配置注解 -->
-	<task:scheduled-tasks>
-		<!-- 5秒一次 -->
-		<task:scheduled ref="xmlTask" method="runCron" cron="0/5 * * * * ?"/>
-		<!-- 固定每3秒执行一次 -->
-		<task:scheduled ref="xmlTask" method="runRate" fixed-rate="3000"/>
-	</task:scheduled-tasks>
+	<!-- 异步线程池 -->
+	<!-- pool-size="4-10" 核心线程数，默认为1; 最大线程数，默认为Integer.MAX_VALUE
+		 queue-capacity 队列最大长度,默认为Integer.MAX_VALUE
+		 keep-alive 线程池维护线程所允许的空闲时间，默认为60秒
+		 rejection-policy 拒绝策略：
+		 	ABORT（缺省）：抛出TaskRejectedException异常，然后不执行
+			DISCARD：不执行，也不抛出异常即放弃该线程
+			DISCARD_OLDEST：丢弃queue中最旧的那个任务
+			CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行(不再异步)
+	 -->
+	<task:executor id="executor" pool-size="10-300" queue-capacity="500" keep-alive="60" rejection-policy="CALLER_RUNS" />
 
 </beans>
