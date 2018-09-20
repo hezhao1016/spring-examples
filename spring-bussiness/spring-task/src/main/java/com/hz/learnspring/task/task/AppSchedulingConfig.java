@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AppSchedulingConfig {
+    
     /**
      * 每10秒执行一次
      *
-     * @author zhangyd
+     * @author hezhao
      */
     @Scheduled(cron = "0/10 * * * * ?")
     public void doJobByCron() {
@@ -22,9 +23,19 @@ public class AppSchedulingConfig {
     }
 
     /**
+     * 使用配置文件中的表达式，灵活
+     *
+     * @author hezhao
+     */
+    @Scheduled(cron = "${jobs.schedule}")
+    public void doJobByCronConfig() {
+        LoggerUtil.info("-----------------doJobByCronConfig");
+    }
+
+    /**
      * 固定每5秒执行一次
      *
-     * @author zhangyd
+     * @author hezhao
      */
     @Scheduled(fixedRate = 5 * 1000)
     public void doJobByFixedRate() {
@@ -34,7 +45,7 @@ public class AppSchedulingConfig {
     /**
      * 上次任务结束后一秒后再次执行
      *
-     * @author zhangyd
+     * @author hezhao
      */
     @Scheduled(fixedDelay = 1 * 1000)
     public void doJobByFixedDelay() {
@@ -44,7 +55,7 @@ public class AppSchedulingConfig {
     /**
      * 第一次延迟1秒后执行，之后按fixedRate的规则每2秒执行一次
      *
-     * @author zhangyd
+     * @author hezhao
      */
     @Scheduled(initialDelay = 1000, fixedRate = 2000)
     public void doInitialDelay() {

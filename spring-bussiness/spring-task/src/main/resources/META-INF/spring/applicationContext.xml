@@ -9,13 +9,16 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd"
-	   default-lazy-init="true">
+	   default-lazy-init="false">
 
 	<!-- 配置扫描包 -->
 	<context:component-scan base-package="com.hz.learnspring" />
 
 	<!-- 开启注解 -->
 	<context:annotation-config />
+
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath*:task.properties"/>
 
 	<!-- 开启定时任务注解，发现注解了@Scheduled的任务并后台执行 -->
 	<task:annotation-driven scheduler="scheduler" />
