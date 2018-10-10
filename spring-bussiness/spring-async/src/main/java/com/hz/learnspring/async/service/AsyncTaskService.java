@@ -21,22 +21,27 @@ public class AsyncTaskService {
 
     @Async    // 这里进行标注为异步任务，在执行此方法的时候，会单独开启线程来执行
     public void f1() {
-        logger.info("f1 : " + Thread.currentThread().getName() + "   " + UUID.randomUUID().toString());
-        try {
-            // 模拟耗时操作
-            Thread.sleep(new Random().nextInt(10));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 100; i++) {
+            logger.info("f1 : " + Thread.currentThread().getName() + "   " + UUID.randomUUID().toString());
+            try {
+                // 模拟耗时操作
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Async
     public void f2() {
-        logger.info("f2 : " + Thread.currentThread().getName() + "   " + UUID.randomUUID().toString());
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 100; i++) {
+            logger.info("f2 : " + Thread.currentThread().getName() + "   " + UUID.randomUUID().toString());
+            try {
+                // 模拟耗时操作
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

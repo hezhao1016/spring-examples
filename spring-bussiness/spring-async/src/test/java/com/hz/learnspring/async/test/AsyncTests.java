@@ -10,10 +10,8 @@ public class AsyncTests {
         AsyncTaskService asyncTaskService = applicationContext.getBean(AsyncTaskService.class);
 
         // 观察日志，可以看到我们两个任务是异步交替进行的。
-        for (int i = 0; i < 100; i++) {
-            asyncTaskService.f1(); // 执行异步任务
-            asyncTaskService.f2();
-        }
+        asyncTaskService.f1(); // 执行异步任务
+        asyncTaskService.f2();
     }
 
 }
