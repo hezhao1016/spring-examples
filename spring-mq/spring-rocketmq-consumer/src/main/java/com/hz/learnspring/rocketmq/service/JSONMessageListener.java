@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class JSONMessageListener extends RocketMQMessageListener {
 
-    private Logger logger = LoggerFactory.getLogger(StringMessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(StringMessageListener.class);
 
     /**
      * 初始化消息消费者

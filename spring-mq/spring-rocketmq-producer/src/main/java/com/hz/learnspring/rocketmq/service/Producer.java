@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Producer {
 
-    private Logger logger = LoggerFactory.getLogger(Producer.class);
+    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
 
     private final DefaultMQProducer producer;
 

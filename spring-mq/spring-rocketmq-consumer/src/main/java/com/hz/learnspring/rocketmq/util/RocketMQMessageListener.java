@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class RocketMQMessageListener {
 
-    private Logger logger = LoggerFactory.getLogger(RocketMQMessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(RocketMQMessageListener.class);
 
     protected final DefaultMQPushConsumer consumer;
 

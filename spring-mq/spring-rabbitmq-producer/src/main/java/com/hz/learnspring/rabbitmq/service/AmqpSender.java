@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AmqpSender {
 
-    private Logger logger = LoggerFactory.getLogger(AmqpSender.class);
+    private static final Logger logger = LoggerFactory.getLogger(AmqpSender.class);
 
     @Autowired
     private AmqpTemplate rabbitTemplate;

@@ -19,7 +19,7 @@ import java.util.Map;
 @Repository
 public class CronRepository {
 
-    private static Logger logger = LoggerFactory.getLogger(CronRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(CronRepository.class);
 
     private static Map<String, Cron> CRON_DB = new HashMap<>();
 

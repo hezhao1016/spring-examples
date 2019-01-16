@@ -16,7 +16,7 @@ import java.util.Optional;
  */
 public class KafkaMessageListener implements MessageListener<String, String> {
 
-    private Logger logger = LoggerFactory.getLogger(KafkaMessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaMessageListener.class);
 
     @Override
     public void onMessage(ConsumerRecord<String, String> record) {

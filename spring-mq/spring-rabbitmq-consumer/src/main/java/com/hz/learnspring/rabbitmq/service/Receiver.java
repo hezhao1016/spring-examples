@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Lazy(false)
 public class Receiver {
 
-    private Logger logger = LoggerFactory.getLogger(Receiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
 
     // 通过 @RabbitListener 注解定义对队列的监听
     @RabbitListener(queues = "simple.message")

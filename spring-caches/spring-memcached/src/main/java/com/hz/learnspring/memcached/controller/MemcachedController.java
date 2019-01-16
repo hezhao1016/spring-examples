@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping(value = "/memcached")
 public class MemcachedController {
 
-    private Logger logger = LoggerFactory.getLogger(MemcachedController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MemcachedController.class);
 
     @Autowired
     private MemcachedService memcachedService;
